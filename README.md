@@ -10,7 +10,7 @@ It's a simple app to showcase my love for music. The layout is designed beautifu
 
 ## Screenshots
 
-<img src="screenshots/1.png" width=40%/> <img src="screenshots/1.png" width=40%/>
+<img src="screenshots/1.png" width=40%/> <img src="screenshots/2.png" width=40%/>
 
 Final screenshot isn't shown due to surprise purposes.
 
