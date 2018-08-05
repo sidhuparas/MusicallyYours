@@ -1,19 +1,15 @@
 package com.parassidhu.musicallyyours;
 
-import android.content.ContentUris;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private TextView mDescription;
     private TextView mCounter;
+    private TextView mInstructions;
+    private ImageView mDiljit;
 
-    Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             runOnUiThread(new Runnable() {
@@ -49,12 +47,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         mCounter = findViewById(R.id.counter_tv);
         bhangra = findViewById(R.id.imageView);
         mDescription = findViewById(R.id.description);
+        mInstructions = findViewById(R.id.instruction);
+        mDiljit = findViewById(R.id.diljit_iv);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
 
         mCounter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 // Intentionally not put in else block
                 if (currentValue==0){
                     showContents();
-                    handler.removeCallbacks(runnable);
-                    mCounter.setVisibility(View.GONE);
-                    mDescription.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -108,22 +109,11 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(R.drawable.bhangra)
                 .into(bhangra);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-         if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        handler.removeCallbacks(runnable);
+        mCounter.setVisibility(View.GONE);
+        mDescription.setVisibility(View.VISIBLE);
+        mInstructions.setVisibility(View.GONE);
+        mDiljit.setVisibility(View.VISIBLE);
     }
 }

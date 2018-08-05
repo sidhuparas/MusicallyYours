@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">MusicallyYours</string>
+    <string name="app_name">Musically Yours</string>
     <string name="action_settings">Settings</string>
     <string name="description">Music energize me from inside and I feel just like the image shown above :D I stay away from sad kind of music and always listen to energizing songs like Bhangra songs. Diljit Dosanjh is my favorite singer and I\'m following him ever since his first album came out.</string>
+    <string name="def_count">5</string>
+    <string name="image_description">Bhangra Image</string>
+    <string name="instructions">Tap the number below quickly to reveal the easter egg:</string>
 </resources>
